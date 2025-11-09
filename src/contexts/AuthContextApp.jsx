@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useCallback } from 'react';
 import { useAuth } from 'reactfire';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
@@ -9,10 +9,11 @@ export const AuthContext = createContext();
 export const AuthContextApp = ({ children }) => {
     const auth = useAuth();
     const firestore = useFirestore();
-    const [user, setUser] = useState(undefined); // undefined = loading, null = no autenticado, object = autenticado
-    const [userData, setUserData] = useState(null); // Datos adicionales del usuario desde Firestore
+    const [user, setUser] = useState(undefined);
+    const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const getUserData = async (uid) => {
+    
+    const getUserData = useCallback(async (uid) => {
         try {
             const userDocRef = doc(firestore, 'users', uid);
             const userDoc = await getDoc(userDocRef);
@@ -31,7 +32,7 @@ export const AuthContextApp = ({ children }) => {
             setUserData(null);
             return null;
         }
-    };
+    }, [firestore]);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -46,7 +47,7 @@ export const AuthContextApp = ({ children }) => {
         });
 
         return () => unsubscribe();
-    }, [auth]);
+    }, [auth, getUserData]);
 
     const value = {
         user,

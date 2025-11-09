@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, { useState, useRef, useEffect, useContext, useCallback } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
@@ -103,10 +103,6 @@ const Chat = () => {
         scrollToBottom();
     }, [messages, showFeedbackInline]);
 
-    useEffect(() => {
-        checkServerHealth();
-    }, []);
-
     // DETECTAR ?new= para resetear el chat
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
@@ -147,22 +143,7 @@ const Chat = () => {
         }
     }, [location.search, navigate]);
 
-    // Cargar chat desde History
-    useEffect(() => {
-        if (!user || !chatId) return;
-
-        if (location.state?.noReload) {
-            window.history.replaceState({}, document.title);
-            return;
-        }
-
-        if (loadedChatIdRef.current !== chatId) {
-            loadedChatIdRef.current = chatId;
-            loadChat(chatId);
-        }
-    }, [chatId, user, location.state]);
-
-    const checkServerHealth = async () => {
+    const checkServerHealth = useCallback(async () => {
         try {
             const response = await fetch(`${API_BASE_URL}/health`);
             if (response.ok) {
@@ -174,7 +155,11 @@ const Chat = () => {
             console.error('Error checking server health:', error);
             setServerStatus('offline');
         }
-    };
+    }, [API_BASE_URL]);
+
+    useEffect(() => {
+        checkServerHealth();
+    }, [checkServerHealth]);
 
     const convertTimestampToDate = (timestamp) => {
         if (!timestamp) return new Date();
@@ -185,7 +170,7 @@ const Chat = () => {
         return new Date();
     };
 
-    const loadChat = async (id) => {
+    const loadChat = useCallback(async (id) => {
         setIsLoadingChat(true);
         try {
             const chatDocRef = doc(firestore, 'chats', id);
@@ -210,7 +195,6 @@ const Chat = () => {
                 setCurrentThreadId(chatData.threadId || null);
                 setShowSuggestions(false);
 
-                // Cargar feedbacks ya dados
                 if (chatData.feedbacksGiven) {
                     setFeedbackGiven(new Set(chatData.feedbacksGiven));
                 }
@@ -224,7 +208,22 @@ const Chat = () => {
         } finally {
             setIsLoadingChat(false);
         }
-    };
+    }, [firestore, user, navigate]);
+
+    useEffect(() => {
+        if (!user || !chatId) return;
+
+        if (location.state?.noReload) {
+            window.history.replaceState({}, document.title);
+            return;
+        }
+
+        if (loadedChatIdRef.current !== chatId) {
+            loadedChatIdRef.current = chatId;
+            loadChat(chatId);
+        }
+    }, [chatId, user, location.state, loadChat]);
+
 
     const handleSendMessage = async (messageText = null) => {
         const mensaje = messageText || inputMessage.trim();

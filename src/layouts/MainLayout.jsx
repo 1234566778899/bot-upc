@@ -28,7 +28,6 @@ import {
     Menu as MenuIcon,
     Chat as ChatIcon,
     History as HistoryIcon,
-    Home as HomeIcon,
     Settings as SettingsIcon,
     School as SchoolIcon,
     Logout as LogoutIcon,
