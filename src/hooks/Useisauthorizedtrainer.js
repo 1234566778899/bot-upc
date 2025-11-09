@@ -2,7 +2,8 @@ import { useUser } from 'reactfire';
 
 const AUTHORIZED_EMAILS = [
     'gabitotaipe01@gmail.com',
-    'ordazhoyos2001@gmail.com'
+    'ordazhoyos2001@gmail.com',
+    'lilstoukz8@gmail.com'
 ];
 
 /**
