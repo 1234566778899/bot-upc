@@ -1,5 +1,4 @@
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import React from 'react'
 import '../styles/Login.css'
 import { showInfoToast } from '../utils/showInfoToast';
 import { useForm } from 'react-hook-form';

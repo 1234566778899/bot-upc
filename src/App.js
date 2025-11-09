@@ -7,7 +7,6 @@ import { getFirestore } from 'firebase/firestore';
 import Chat from './pages/Chat';
 import { History } from './pages/History';
 import MainLayout from './layouts/MainLayout';
-import { Settings } from './pages/Settings';
 import { Login } from './pages/auth/Login';
 import { Register } from './pages/auth/Register';
 import { Training } from './pages/Training';

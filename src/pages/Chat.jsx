@@ -29,7 +29,6 @@ import {
     School as SchoolIcon,
     MoreVert as MoreVertIcon,
     EmojiEmotions as EmojiIcon,
-    Error as ErrorIcon,
     Refresh as RefreshIcon,
     SmartToy as BotIcon,
     Person as PersonIcon

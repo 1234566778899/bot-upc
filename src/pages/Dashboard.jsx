@@ -12,8 +12,7 @@ import {
     List,
     ListItem,
     ListItemText,
-    Divider,
-    useTheme
+    Divider
 } from '@mui/material';
 import {
     ThumbUp as ThumbUpIcon,
@@ -41,8 +40,6 @@ import {
 const Dashboard = () => {
     const [estadisticas, setEstadisticas] = useState(null);
     const [loading, setLoading] = useState(true);
-    const theme = useTheme();
-
     useEffect(() => {
         cargarEstadisticas();
     }, []);
