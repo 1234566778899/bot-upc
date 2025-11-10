@@ -15,7 +15,6 @@ import {
 import {
     ChatBubbleOutline as MessageCircleIcon,
     MenuBook as BookOpenIcon,
-    AccessTime as ClockIcon,
     History as HistoryIcon,
     TrackChanges as TargetIcon,
     Security as ShieldIcon,
