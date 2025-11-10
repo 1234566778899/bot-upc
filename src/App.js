@@ -11,6 +11,7 @@ import { Login } from './pages/auth/Login';
 import { Register } from './pages/auth/Register';
 import { Training } from './pages/Training';
 import Dashboard from './pages/Dashboard';
+import LandingPage from './pages/Landing';
 
 function App() {
   const firebaseApp = useFirebaseApp();
@@ -23,19 +24,20 @@ function App() {
         <AuthContextApp>
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/" element={<LandingPage />} />
             <Route path="/register" element={<Register />} />
             <Route
-              path="/"
+              path="admin"
               element={<MainLayout />}
             >
               <Route index element={<Navigate to="/chat" replace />} />
               <Route path="chat" element={<Chat />} />
-              <Route path="/chat/:chatId" element={<Chat />} />
+              <Route path="chat/:chatId" element={<Chat />} />
               <Route path="feedback" element={<Dashboard />} />
               <Route path="history" element={<History />} />
               <Route path="training" element={<Training />} />
             </Route>
-            <Route path="*" element={<Navigate to="/login" replace />} />
+            {/* <Route path="*" element={<Navigate to="/home" replace />} /> */}
           </Routes>
         </AuthContextApp>
       </FirestoreProvider>

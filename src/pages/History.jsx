@@ -137,7 +137,7 @@ export const History = () => {
     }, [chats, searchTerm, sortBy]);
 
     const handleChatClick = (chatId) => {
-        navigate(`/chat/${chatId}`);
+        navigate(`/admin/chat/${chatId}`);
     };
 
     const handleMenuOpen = (event, chat) => {
@@ -429,7 +429,7 @@ export const History = () => {
                                 <Button
                                     variant="contained"
                                     startIcon={<ChatIcon />}
-                                    onClick={() => navigate('/chat')}
+                                    onClick={() => navigate('/admin/chat')}
                                     sx={{ borderRadius: 3 }}
                                 >
                                     Iniciar Chat

@@ -48,34 +48,12 @@ export const Register = () => {
     const navigate = useNavigate();
     const auth = useAuth();
     const firestore = useFirestore();
+
     const carreras = [
+        'Ingeniería de Sistemas de Información',
         'Ingeniería de Software',
-        'Ingeniería de Sistemas',
-        'Ciencia de la Computación',
-        'Ingeniería Civil',
-        'Ingeniería Industrial',
-        'Ingeniería Empresarial',
-        'Administración',
-        'Marketing',
-        'Contabilidad',
-        'Economía',
-        'Arquitectura',
-        'Diseño Gráfico',
-        'Diseño de Interiores',
-        'Comunicación Audiovisual',
-        'Periodismo',
-        'Derecho',
-        'Psicología',
-        'Medicina Humana',
-        'Nutrición',
-        'Terapia Física',
-        'Ingeniería Electrónica',
-        'Ingeniería Mecatrónica',
-        'Ingeniería de Telecomunicaciones',
-        'Ingeniería Ambiental',
-        'Ingeniería de Minas',
-        'Gastronomía',
-        'Hotelería y Administración'
+        'Ciencias de la Computación',
+        'Ciberseguridad'
     ].sort();
 
     const handleChange = (e) => {
@@ -159,7 +137,7 @@ export const Register = () => {
                     lastActivity: new Date()
                 }
             });
-            navigate('/chat');
+            navigate('/admin/chat');
         } catch (error) {
             console.error('Error en registro:', error);
             switch (error.code) {

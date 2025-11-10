@@ -49,7 +49,7 @@ export const Login = () => {
 
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            navigate('/chat');
+            navigate('/admin/chat');
         } catch (error) {
             console.error('Error en login:', error);
             switch (error.code) {
@@ -110,7 +110,7 @@ export const Login = () => {
                     'stats.lastActivity': new Date()
                 }, { merge: true });
             }
-            navigate('/chat');
+            navigate('/admin/chat');
         } catch (error) {
             console.error('Error en login con Google:', error);
             if (error.code === 'auth/popup-closed-by-user') {

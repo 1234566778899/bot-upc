@@ -89,7 +89,7 @@ const MainLayout = () => {
     };
 
     const handleNewChat = () => {
-        navigate(`/chat?new=${Date.now()}`);
+        navigate(`/admin/chat?new=${Date.now()}`);
         if (isMobile) {
             setMobileOpen(false);
         }
@@ -117,21 +117,21 @@ const MainLayout = () => {
 
     // Menu items básicos
     const menuItems = [
-        { text: 'Chat Universitario', icon: <ChatIcon />, path: '/chat' },
-        { text: 'Historial', icon: <HistoryIcon />, path: '/history' },
+        { text: 'Chat Universitario', icon: <ChatIcon />, path: '/admin/chat' },
+        { text: 'Historial', icon: <HistoryIcon />, path: '/admin/history' },
     ];
 
     if (isAuthorizedTrainer) {
         menuItems.push({
             text: 'Entrenamiento',
             icon: <PsychologyIcon />,
-            path: '/training',
+            path: '/admin/training',
             special: true
         });
         menuItems.push({
             text: 'Feedback',
             icon: <Feedback />,
-            path: '/feedback',
+            path: '/admin/feedback',
             special: true
         });
     }
@@ -382,7 +382,7 @@ const MainLayout = () => {
                     }
                 }}
             >
-                <MenuItem onClick={() => { handleMenuClose(); navigate('/settings'); }}>
+                <MenuItem onClick={() => { handleMenuClose(); navigate('/admin/settings'); }}>
                     <ListItemIcon>
                         <SettingsIcon fontSize="small" />
                     </ListItemIcon>

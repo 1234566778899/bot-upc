@@ -138,7 +138,7 @@ const Chat = () => {
 
             // Limpiar URL
             setTimeout(() => {
-                navigate('/chat', { replace: true });
+                navigate('/admin/chat', { replace: true });
             }, 100);
         }
     }, [location.search, navigate]);
@@ -181,7 +181,7 @@ const Chat = () => {
 
                 if (chatData.userId !== user.uid) {
                     setError('No tienes acceso a este chat');
-                    navigate('/chat');
+                    navigate('/admin/chat');
                     return;
                 }
 
@@ -200,7 +200,7 @@ const Chat = () => {
                 }
             } else {
                 setError('Chat no encontrado');
-                navigate('/chat');
+                navigate('/admin/chat');
             }
         } catch (error) {
             console.error('Error loading chat:', error);
@@ -348,7 +348,7 @@ const Chat = () => {
                 });
 
                 setCurrentChatId(chatDocId);
-                navigate(`/chat/${chatDocId}`, { replace: true, state: { noReload: true } });
+                navigate(`/admin/chat/${chatDocId}`, { replace: true, state: { noReload: true } });
 
             } else {
                 const chatDocRef = doc(firestore, 'chats', chatDocId);
