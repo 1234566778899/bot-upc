@@ -58,6 +58,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         cargarEstadisticas();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cursoSeleccionado, carreraSeleccionada]);
 
     const cargarEstadisticas = async () => {
