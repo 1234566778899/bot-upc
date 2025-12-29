@@ -607,6 +607,25 @@ const Chat = () => {
                                                                 {children}
                                                             </Typography>
                                                         ),
+                                                        a: ({ href, children }) => (
+                                                            <Box
+                                                                component="a"
+                                                                href={href}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                sx={{
+                                                                    color: 'primary.main',
+                                                                    textDecoration: 'underline',
+                                                                    cursor: 'pointer',
+                                                                    '&:hover': {
+                                                                        color: 'primary.dark',
+                                                                        textDecoration: 'underline'
+                                                                    }
+                                                                }}
+                                                            >
+                                                                {children}
+                                                            </Box>
+                                                        ),
                                                         ul: ({ children }) => (
                                                             <Box component="ul" sx={{ pl: 3, mb: 1 }}>
                                                                 {children}
@@ -714,59 +733,6 @@ const Chat = () => {
                 </Box>
             </Box>
 
-            {/* Suggestions */}
-            {showSuggestions && userData?.curso && userData?.carrera && messages.length <= 2 && (
-                <Box sx={{
-                    p: 2,
-                    bgcolor: 'white',
-                    borderTop: '1px solid',
-                    borderColor: 'divider'
-                }}>
-                    <Box sx={{ maxWidth: 900, mx: 'auto' }}>
-                        <Typography variant="subtitle2" color="text.secondary" gutterBottom fontWeight={600}>
-                            Sugerencias rápidas:
-                        </Typography>
-                        <Box sx={{
-                            display: 'flex',
-                            gap: 1,
-                            flexWrap: 'wrap',
-                            ...(isMobile && {
-                                overflowX: 'auto',
-                                flexWrap: 'nowrap',
-                                pb: 1,
-                                '&::-webkit-scrollbar': { height: 6 },
-                                '&::-webkit-scrollbar-track': { bgcolor: 'grey.100' },
-                                '&::-webkit-scrollbar-thumb': { bgcolor: 'grey.300', borderRadius: 2 }
-                            })
-                        }}>
-                            {suggestions.map((suggestion, index) => (
-                                <Chip
-                                    key={index}
-                                    label={suggestion.text}
-                                    onClick={() => handleSuggestionClick(suggestion)}
-                                    color={suggestion.color}
-                                    variant="outlined"
-                                    disabled={serverStatus === 'offline'}
-                                    sx={{
-                                        borderRadius: 5,
-                                        height: 32,
-                                        fontSize: '0.8rem',
-                                        fontWeight: 500,
-                                        minWidth: isMobile ? 'auto' : 'fit-content',
-                                        whiteSpace: 'nowrap',
-                                        bgcolor: 'white',
-                                        '&:hover': {
-                                            transform: 'translateY(-1px)',
-                                            boxShadow: 2
-                                        },
-                                        transition: 'all 0.2s ease'
-                                    }}
-                                />
-                            ))}
-                        </Box>
-                    </Box>
-                </Box>
-            )}
 
             {/* Input Area */}
             <Paper
