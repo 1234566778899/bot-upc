@@ -1,4 +1,4 @@
 export const CONFIG = {
-    //uri: 'https://preguntas-01-anonimas.ue.r.appspot.com',
-    uri: 'http://localhost:4000',
+    uri: 'https://high-theme-472622-n1.uc.r.appspot.com',
+    //uri: 'http://localhost:4000',
 }
