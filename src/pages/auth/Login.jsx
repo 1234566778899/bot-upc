@@ -53,11 +53,10 @@ export const Login = () => {
         } catch (error) {
             console.error('Error en login:', error);
             switch (error.code) {
+                case 'auth/invalid-credential':
                 case 'auth/user-not-found':
-                    setError('No existe una cuenta con este correo');
-                    break;
                 case 'auth/wrong-password':
-                    setError('Contraseña incorrecta');
+                    setError('Correo o contraseña incorrectos');
                     break;
                 case 'auth/invalid-email':
                     setError('Correo electrónico inválido');
@@ -68,8 +67,11 @@ export const Login = () => {
                 case 'auth/too-many-requests':
                     setError('Demasiados intentos fallidos. Intenta más tarde');
                     break;
+                case 'auth/network-request-failed':
+                    setError('Error de conexión. Verifica tu internet');
+                    break;
                 default:
-                    setError('Error al iniciar sesión. Intenta de nuevo.');
+                    setError(`Error al iniciar sesión (${error.code ?? 'desconocido'}). Intenta de nuevo.`);
             }
         } finally {
             setLoading(false);
@@ -295,8 +297,22 @@ export const Login = () => {
                         </Stack>
                     </form>
 
-                    {/* Link a Registro */}
+                    {/* Links de navegación */}
                     <Box sx={{ mt: 3, textAlign: 'center' }}>
+                        <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+                            <Link
+                                component="button"
+                                variant="body2"
+                                onClick={() => navigate('/forgot-password')}
+                                sx={{
+                                    fontWeight: 600,
+                                    textDecoration: 'none',
+                                    '&:hover': { textDecoration: 'underline' }
+                                }}
+                            >
+                                ¿Olvidaste tu contraseña?
+                            </Link>
+                        </Typography>
                         <Typography variant="body2" color="text.secondary">
                             ¿No tienes una cuenta?{' '}
                             <Link

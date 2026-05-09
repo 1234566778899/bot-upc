@@ -93,9 +93,9 @@ export const Register = () => {
             setError('Por favor completa todos los campos');
             return false;
         }
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(formData.email)) {
-            setError('Por favor ingresa un correo electrónico válido');
+        const gmailRegex = /^[^\s@]+@gmail\.com$/i;
+        if (!gmailRegex.test(formData.email)) {
+            setError('Solo se permiten correos de Gmail (@gmail.com)');
             return false;
         }
 

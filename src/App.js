@@ -9,6 +9,7 @@ import { History } from './pages/History';
 import MainLayout from './layouts/MainLayout';
 import { Login } from './pages/auth/Login';
 import { Register } from './pages/auth/Register';
+import { ForgotPassword } from './pages/auth/ForgotPassword';
 import { Training } from './pages/Training';
 import Dashboard from './pages/Dashboard';
 import LandingPage from './pages/Landing';
@@ -26,6 +27,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<LandingPage />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route
               path="admin"
               element={<MainLayout />}
