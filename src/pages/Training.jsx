@@ -33,11 +33,7 @@ import {
     Info as InfoIcon,
 } from '@mui/icons-material';
 import { CONFIG } from '../config';
-
-const AUTHORIZED_EMAILS = [
-    'gabitotaipe01@gmail.com',
-    'ordazhoyos2001@gmail.com'
-];
+import { useIsAuthorizedTrainer } from '../hooks/Useisauthorizedtrainer';
 
 // Opciones limitadas de cursos y carreras
 const CURSOS_DISPONIBLES = [
@@ -62,8 +58,7 @@ export const Training = () => {
     const [progreso, setProgreso] = useState(0);
     const [progresoTexto, setProgresoTexto] = useState('');
 
-    // Verificar si el usuario tiene permisos
-    const isAuthorized = user && AUTHORIZED_EMAILS.includes(user.email);
+    const isAuthorized = useIsAuthorizedTrainer();
 
     if (!isAuthorized) {
         return (
