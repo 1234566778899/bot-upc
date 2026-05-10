@@ -246,7 +246,7 @@ export const History = () => {
             <Paper
                 elevation={2}
                 sx={{
-                    p: 3,
+                    p: { xs: 2, sm: 2.5, md: 3 },
                     bgcolor: 'white',
                     borderBottom: '1px solid',
                     borderColor: 'divider',
@@ -254,31 +254,41 @@ export const History = () => {
                 }}
             >
 
-                <Typography variant="h4" fontWeight="bold" color="primary" gutterBottom>
+                <Typography
+                    variant="h4"
+                    fontWeight="bold"
+                    color="primary"
+                    gutterBottom
+                    sx={{ fontSize: { xs: '1.3rem', sm: '1.75rem', md: '2.125rem' } }}
+                >
                     📚 Historial de Conversaciones
                 </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                <Typography variant="body2" color="text.secondary" sx={{ mb: { xs: 1.5, md: 2 } }}>
                     Revisa y continúa tus conversaciones anteriores
                 </Typography>
 
                 {/* Stats Cards */}
-                <Stack direction="row" spacing={2} sx={{ mb: 3, flexWrap: 'wrap' }}>
+                <Stack direction="row" spacing={{ xs: 1, md: 2 }} useFlexGap sx={{ mb: { xs: 1.5, md: 3 } }}>
                     <Paper
                         elevation={0}
                         sx={{
-                            p: 2,
+                            p: { xs: 1, sm: 1.5, md: 2 },
                             flex: 1,
-                            minWidth: isMobile ? '100%' : 'auto',
+                            minWidth: 0,
                             bgcolor: 'primary.lighter',
                             borderRadius: 2,
                             border: '1px solid',
                             borderColor: 'primary.light'
                         }}
                     >
-                        <Typography variant="h4" fontWeight="bold" color="primary">
+                        <Typography
+                            fontWeight="bold"
+                            color="primary"
+                            sx={{ fontSize: { xs: '1.25rem', sm: '1.75rem', md: '2.125rem' } }}
+                        >
                             {stats.totalChats}
                         </Typography>
-                        <Typography variant="caption" color="text.secondary">
+                        <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: '0.65rem', md: '0.75rem' } }}>
                             Total de chats
                         </Typography>
                     </Paper>
@@ -286,19 +296,23 @@ export const History = () => {
                     <Paper
                         elevation={0}
                         sx={{
-                            p: 2,
+                            p: { xs: 1, sm: 1.5, md: 2 },
                             flex: 1,
-                            minWidth: isMobile ? '100%' : 'auto',
+                            minWidth: 0,
                             bgcolor: 'success.lighter',
                             borderRadius: 2,
                             border: '1px solid',
                             borderColor: 'success.light'
                         }}
                     >
-                        <Typography variant="h4" fontWeight="bold" color="success.main">
+                        <Typography
+                            fontWeight="bold"
+                            color="success.main"
+                            sx={{ fontSize: { xs: '1.25rem', sm: '1.75rem', md: '2.125rem' } }}
+                        >
                             {stats.totalMessages}
                         </Typography>
-                        <Typography variant="caption" color="text.secondary">
+                        <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: '0.65rem', md: '0.75rem' } }}>
                             Mensajes
                         </Typography>
                     </Paper>
@@ -306,26 +320,30 @@ export const History = () => {
                     <Paper
                         elevation={0}
                         sx={{
-                            p: 2,
+                            p: { xs: 1, sm: 1.5, md: 2 },
                             flex: 1,
-                            minWidth: isMobile ? '100%' : 'auto',
+                            minWidth: 0,
                             bgcolor: 'info.lighter',
                             borderRadius: 2,
                             border: '1px solid',
                             borderColor: 'info.light'
                         }}
                     >
-                        <Typography variant="h4" fontWeight="bold" color="info.main">
+                        <Typography
+                            fontWeight="bold"
+                            color="info.main"
+                            sx={{ fontSize: { xs: '1.25rem', sm: '1.75rem', md: '2.125rem' } }}
+                        >
                             {stats.chatsToday}
                         </Typography>
-                        <Typography variant="caption" color="text.secondary">
+                        <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: '0.65rem', md: '0.75rem' } }}>
                             Hoy
                         </Typography>
                     </Paper>
                 </Stack>
 
                 {/* Search and Sort */}
-                <Stack direction={isMobile ? 'column' : 'row'} spacing={2}>
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
                     <TextField
                         fullWidth
                         placeholder="Buscar en el historial..."
@@ -361,7 +379,7 @@ export const History = () => {
                         variant="outlined"
                         size="small"
                         sx={{
-                            minWidth: isMobile ? '100%' : 200,
+                            minWidth: { xs: '100%', sm: 180, md: 200 },
                             '& .MuiOutlinedInput-root': {
                                 borderRadius: 3,
                                 bgcolor: '#f5f5f5'
@@ -401,8 +419,8 @@ export const History = () => {
             <Box sx={{
                 flex: 1,
                 overflow: 'auto',
-                px: isMobile ? 1 : 3,
-                py: 2
+                px: { xs: 1, sm: 2, md: 3 },
+                py: { xs: 1.5, md: 2 }
             }}>
                 <Box sx={{ maxWidth: 1200, mx: 'auto' }}>
                     {filteredChats.length === 0 ? (
@@ -455,27 +473,28 @@ export const History = () => {
                                         <ListItemButton
                                             onClick={() => handleChatClick(chat.id)}
                                             sx={{
-                                                p: 2,
+                                                p: { xs: 1.5, md: 2 },
                                                 display: 'flex',
-                                                gap: 2,
+                                                gap: { xs: 1.5, md: 2 },
                                                 alignItems: 'flex-start'
                                             }}
                                         >
                                             <Avatar
                                                 sx={{
                                                     bgcolor: 'primary.main',
-                                                    width: 48,
-                                                    height: 48,
-                                                    mt: 0.5
+                                                    width: { xs: 38, md: 48 },
+                                                    height: { xs: 38, md: 48 },
+                                                    mt: 0.5,
+                                                    flexShrink: 0
                                                 }}
                                             >
-                                                <ChatIcon />
+                                                <ChatIcon fontSize={isMobile ? 'small' : 'medium'} />
                                             </Avatar>
 
                                             <Box sx={{ flex: 1, minWidth: 0 }}>
                                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 0.5 }}>
                                                     <Typography
-                                                        variant="h6"
+                                                        variant={isMobile ? 'body1' : 'h6'}
                                                         fontWeight="600"
                                                         sx={{
                                                             overflow: 'hidden',
