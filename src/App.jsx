@@ -13,6 +13,7 @@ import { ForgotPassword } from './pages/auth/ForgotPassword';
 import { Training } from './pages/Training';
 import Dashboard from './pages/Dashboard';
 import LandingPage from './pages/Landing';
+import ProtectedAdminRoute from './components/ProtectedAdminRoute';
 
 function App() {
   const firebaseApp = useFirebaseApp();
@@ -35,9 +36,9 @@ function App() {
               <Route index element={<Navigate to="/chat" replace />} />
               <Route path="chat" element={<Chat />} />
               <Route path="chat/:chatId" element={<Chat />} />
-              <Route path="feedback" element={<Dashboard />} />
+              <Route path="feedback" element={<ProtectedAdminRoute><Dashboard /></ProtectedAdminRoute>} />
               <Route path="history" element={<History />} />
-              <Route path="training" element={<Training />} />
+              <Route path="training" element={<ProtectedAdminRoute><Training /></ProtectedAdminRoute>} />
             </Route>
             {/* <Route path="*" element={<Navigate to="/home" replace />} /> */}
           </Routes>
