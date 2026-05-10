@@ -365,7 +365,7 @@ const MainLayout = () => {
     );
 
     return (
-        <Box sx={{ display: 'flex', minHeight: '100vh' }}>
+        <Box sx={{ display: 'flex', minHeight: '100vh', overflowX: 'hidden' }}>
             <CssBaseline />
 
             {/* Menu desplegable del usuario */}
@@ -497,10 +497,12 @@ const MainLayout = () => {
                 component="main"
                 sx={{
                     flexGrow: 1,
-                    width: { md: `calc(100% - ${drawerWidth}px)` },
+                    minWidth: 0,
+                    width: { xs: '100%', md: `calc(100% - ${drawerWidth}px)` },
                     minHeight: '100vh',
                     bgcolor: 'grey.50',
-                    mt: { xs: '64px', md: 0 }
+                    mt: { xs: '64px', md: 0 },
+                    overflowX: 'hidden'
                 }}
             >
                 <Outlet />

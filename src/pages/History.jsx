@@ -236,11 +236,12 @@ export const History = () => {
 
     return (
         <Box sx={{
-            height: '100vh',
+            height: { xs: 'calc(100vh - 64px)', md: '100vh' },
             display: 'flex',
             flexDirection: 'column',
             bgcolor: '#f0f2f5',
-            overflow: 'hidden'
+            overflow: 'hidden',
+            width: '100%'
         }}>
             {/* Header */}
             <Paper

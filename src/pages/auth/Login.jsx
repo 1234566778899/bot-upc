@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
     Box,
     Paper,
@@ -29,6 +29,7 @@ import {
 } from 'firebase/auth';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { useAuth, useFirestore } from 'reactfire';
+import { AuthContext } from '../../contexts/AuthContextApp';
 import { PasswordMascot } from './PasswordMascot';
 
 export const Login = () => {
@@ -41,6 +42,21 @@ export const Login = () => {
     const navigate = useNavigate();
     const auth = useAuth();
     const firestore = useFirestore();
+    const { user, loading: authLoading } = useContext(AuthContext);
+
+    useEffect(() => {
+        if (!authLoading && user) {
+            navigate('/admin/chat', { replace: true });
+        }
+    }, [user, authLoading, navigate]);
+
+    if (authLoading || user) {
+        return (
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+                <CircularProgress />
+            </Box>
+        );
+    }
 
     const handleEmailLogin = async (e) => {
         e.preventDefault();
