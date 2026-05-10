@@ -331,16 +331,25 @@ const Chat = () => {
                 chatDocId = `${user.uid}_${Date.now()}`;
                 const chatDocRef = doc(firestore, 'chats', chatDocId);
 
-                const firstUserMessage = messages.find(m => m.sender === 'user')?.text ||
-                    newMessages.find(m => m.sender === 'user')?.text ||
+                const firstUserMessage = newMessages.find(m => m.sender === 'user')?.text ||
+                    messages.find(m => m.sender === 'user')?.text ||
                     'Nueva conversación';
+
+                const messagesToSave = newMessages.map(m => ({
+                    id: m.id,
+                    text: m.text,
+                    sender: m.sender,
+                    timestamp: m.timestamp,
+                    ...(m.type && { type: m.type }),
+                    ...(m.isError && { isError: m.isError }),
+                }));
 
                 await setDoc(chatDocRef, {
                     userId: user.uid,
                     title: firstUserMessage.substring(0, 50) + (firstUserMessage.length > 50 ? '...' : ''),
                     createdAt: serverTimestamp(),
                     updatedAt: serverTimestamp(),
-                    messages: [...messages, ...newMessages],
+                    messages: messagesToSave,
                     threadId: threadId || currentThreadId,
                     curso: userData?.curso || '',
                     carrera: userData?.carrera || '',
@@ -352,8 +361,16 @@ const Chat = () => {
 
             } else {
                 const chatDocRef = doc(firestore, 'chats', chatDocId);
+                const messagesToAdd = newMessages.map(m => ({
+                    id: m.id,
+                    text: m.text,
+                    sender: m.sender,
+                    timestamp: m.timestamp,
+                    ...(m.type && { type: m.type }),
+                    ...(m.isError && { isError: m.isError }),
+                }));
                 await updateDoc(chatDocRef, {
-                    messages: arrayUnion(...newMessages),
+                    messages: arrayUnion(...messagesToAdd),
                     updatedAt: serverTimestamp(),
                     threadId: threadId || currentThreadId,
                     curso: userData?.curso || '',
@@ -362,6 +379,7 @@ const Chat = () => {
             }
         } catch (error) {
             console.error('Error saving to Firebase:', error);
+            setError(`Error al guardar el chat: ${error.message}`);
         }
     };
 

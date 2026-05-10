@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(Get-ChildItem *)",
-      "Bash(git config *)"
+      "Bash(git config *)",
+      "Bash(Select-Object FullName)",
+      "Bash(grep -E \"\\\\.\\(jsx?|tsx?\\)$\")"
     ]
   }
 }

@@ -28,7 +28,6 @@ import {
     Menu as MenuIcon,
     Chat as ChatIcon,
     History as HistoryIcon,
-    Settings as SettingsIcon,
     School as SchoolIcon,
     Logout as LogoutIcon,
     AccountCircle as AccountCircleIcon,
@@ -382,12 +381,6 @@ const MainLayout = () => {
                     }
                 }}
             >
-                <MenuItem onClick={() => { handleMenuClose(); navigate('/admin/settings'); }}>
-                    <ListItemIcon>
-                        <SettingsIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>Configuración</ListItemText>
-                </MenuItem>
                 <MenuItem onClick={() => { handleMenuClose(); setShowCompleteProfile(true); }}>
                     <ListItemIcon>
                         <AccountCircleIcon fontSize="small" />
