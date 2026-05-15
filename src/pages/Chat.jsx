@@ -720,12 +720,23 @@ const Chat = () => {
                                     </Avatar>
                                     <Paper elevation={1} sx={{ p: 2, borderRadius: 3 }}>
                                         <Box sx={{ display: 'flex', gap: 0.5, alignItems: 'center' }}>
-                                            <CircularProgress size={8} />
-                                            <CircularProgress size={8} sx={{ animationDelay: '0.2s' }} />
-                                            <CircularProgress size={8} sx={{ animationDelay: '0.4s' }} />
-                                            <Typography variant="caption" sx={{ ml: 1 }}>
-                                                Escribiendo...
-                                            </Typography>
+                                            {[0, 1, 2].map((i) => (
+                                                <Box
+                                                    key={i}
+                                                    sx={{
+                                                        width: 8,
+                                                        height: 8,
+                                                        borderRadius: '50%',
+                                                        bgcolor: 'text.disabled',
+                                                        animation: 'typing-bounce 1.2s ease-in-out infinite',
+                                                        animationDelay: `${i * 0.2}s`,
+                                                        '@keyframes typing-bounce': {
+                                                            '0%, 80%, 100%': { transform: 'translateY(0)' },
+                                                            '40%': { transform: 'translateY(-6px)' },
+                                                        },
+                                                    }}
+                                                />
+                                            ))}
                                         </Box>
                                     </Paper>
                                 </Box>
